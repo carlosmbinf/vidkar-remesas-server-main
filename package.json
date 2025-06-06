@@ -2,17 +2,22 @@
   "name": "meteor-app",
   "private": true,
   "scripts": {
-    "start": "MONGO_URL='mongodb://root:lastunas123@vidkar-shard-00-00.92q4y.mongodb.net:27017,vidkar-shard-00-01.92q4y.mongodb.net:27017,vidkar-shard-00-02.92q4y.mongodb.net:27017/meteor?ssl=true&replicaSet=atlas-axzwc9-shard-0&authSource=admin&retryWrites=true&w=majority' meteor run --port 6000 --settings=settings.json --allow-superuser --production",
+    "start": "MONGO_URL='mongodb://root:lastunas123@vidkar-shard-00-00.92q4y.mongodb.net:27017,vidkar-shard-00-01.92q4y.mongodb.net:27017,vidkar-shard-00-02.92q4y.mongodb.net:27017/meteor?ssl=true&replicaSet=atlas-axzwc9-shard-0&authSource=admin&retryWrites=true&w=majority' meteor run --port 3000 --settings=settings.json --allow-superuser --production",
     "test": "meteor test --once --driver-package meteortesting:mocha",
     "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
     "visualize": "meteor --production --extra-packages bundle-visualizer"
   },
   "dependencies": {
     "@babel/runtime": "^7.20.7",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^7.1.1",
     "axios": "^1.9.0",
     "meteor-node-stubs": "^1.2.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router": "^7.6.2",
+    "react-router-dom": "^7.6.2",
     "telegraf": "^4.16.3"
   },
   "meteor": {
