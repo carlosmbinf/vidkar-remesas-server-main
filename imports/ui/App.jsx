@@ -10,7 +10,7 @@ import {
   Link,
   useRouteMatch,
   useParams
-} from "react-router-dom";
+} from "react-router";
 
 // import PersistentDrawerLeft from './App'
 
@@ -59,19 +59,17 @@ export default function App() {
 
 
   return (
-    <ThemeProvider2>
         <Router>
           <div className={classes.root}>
 
             <Switch>
               <Route path="/">
-              <h1>HOLA MUNDO</h1>
+              <div>Hello World</div>
                 {/* {userActual ? <PersistentDrawerLeft /> : <LoginPage />} */}
               </Route>
             </Switch>
           </div>
         </Router>
-    </ThemeProvider2>
   );
 }
 
