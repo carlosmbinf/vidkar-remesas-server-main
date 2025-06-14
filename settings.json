@@ -2,10 +2,11 @@
 	"public": {
 		"baseUrl": "http://localhost:5500/",
 		"MONGO_URL":"mongodb://127.0.0.1:27017/meteor",
-		"ROOT_URL": "https://www.vidkar.com",
+		"ROOT_URL": "http://recharge.vidkar.com:3000",
 		"administradores":["carlosmbinf"],
 		"mostrarCompras":true,
-		"tokenBotTelegram":"7069900112:AAGkznNP_vh2NvqWQEI3YY1gcZ0IlRYY57I"
+		"tokenBotTelegram":"7069900112:AAGkznNP_vh2NvqWQEI3YY1gcZ0IlRYY57I",
+		"regiones":["CU"]
 	 },
 	 "private":{
 
@@ -21,5 +22,4 @@
 		"appId": "333168168832785",
         "secret": "db4961425ccd6b501559fe4a21aa0cff"
 	  }
-
 }

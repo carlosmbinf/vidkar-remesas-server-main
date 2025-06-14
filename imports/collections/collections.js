@@ -1,140 +1,40 @@
 import { Mongo } from "meteor/mongo";
-import SimpleSchema from "simpl-schema";
 import { Meteor } from "meteor/meteor";
 
-SimpleSchema.extendOptions(["autoform"]);
+import SimpleSchema from 'simpl-schema';
 
-export const PelisCollection = new Mongo.Collection("pelisRegister");
 
-export const DescargasCollection = new Mongo.Collection("descargasRegister");
-export const TVCollection = new Mongo.Collection("tvRegister");
+SimpleSchema.extendOptions(['autoform']);
+import 'meteor/aldeed:collection2/static'; // Habilita attachSchema
+
+
 export const OnlineCollection = new Mongo.Collection("online");
 export const MensajesCollection = new Mongo.Collection("mensajes");
-export const RegisterDataUsersCollection = new Mongo.Collection(
-  "registerDataUsers"
-);
 export const LogsCollection = new Mongo.Collection("Logs");
-export const ServersCollection = new Mongo.Collection("servers");
 export const PreciosCollection = new Mongo.Collection("precios");
 export const VentasCollection = new Mongo.Collection("ventas");
 export const FilesCollection = new Mongo.Collection("files");
 export const VersionsCollection = new Mongo.Collection("versions");
+export const PaypalCollection = new Mongo.Collection("paypal");
+export const CarritoCollection = new Mongo.Collection("carrito");
+export const preciosDolarCollection = new Mongo.Collection("preciosDolar");
+export const AsignacionRemesaAdminCollection = new Mongo.Collection("asignacionRemesaAdmins");
 
-export const CapitulosCollection = new Mongo.Collection("seriesCapitulos");
-export const TemporadasCollection = new Mongo.Collection("seriesTemporadas");
-export const SeriesCollection = new Mongo.Collection("series");
+///////////////////////////////////NUEVOS PARA RECARGAS//////////////
 
-export const AudiosCollection = new Mongo.Collection("audios");
+export const ProductosCollection = new Mongo.Collection("productos");
+export const ProductosDescriptionsCollection = new Mongo.Collection("productosDescriptions");
+export const CountriesCollection = new Mongo.Collection("countries");
+export const ProvidersCollection = new Mongo.Collection("providers");
+export const RegionsCollection = new Mongo.Collection("regions");
+export const ConfigCollection = new Mongo.Collection("config");
 
-export const NotificacionUsersConectadosVPNCollection = new Mongo.Collection("notificacionUsersConectadosVPN");
+////////////////////////////////////////////////////////////////////
+
 
 Meteor.methods({
   async exportDataTo(urlMongoDB) {
-    var mi = require("mongoimport");
-    try {
-      await mi({
-        fields: PelisCollection.find().fetch(), // {array} data to import
-        db: "meteor", // {string} name of db
-        collection: "pelisRegister", // {string|function} name of collection, or use a function to
-        //  return a name, accept one param - [fields] the fields to import
-        host: urlMongoDB,
-        callback: (err, db) => {
-          err && console.error(err);
-        },
-      });
-    } catch (error) {
-      console.log(error);
-    }
-    try {
-      await mi({
-        fields: SeriesCollection.find().fetch(), // {array} data to import
-        db: "meteor", // {string} name of db
-        collection: "series", // {string|function} name of collection, or use a function to
-        //  return a name, accept one param - [fields] the fields to import
-        host: urlMongoDB,
-        callback: (err, db) => {
-          err && console.error(err);
-        },
-      });
-    } catch (error) {
-      console.log(error);
-    }
-    try {
-      await mi({
-        fields: TemporadasCollection.find().fetch(), // {array} data to import
-        db: "meteor", // {string} name of db
-        collection: "temporadasSeries", // {string|function} name of collection, or use a function to
-        //  return a name, accept one param - [fields] the fields to import
-        host: urlMongoDB,
-        callback: (err, db) => {
-          err && console.error(err);
-        },
-      });
-    } catch (error) {
-      console.log(error);
-    }
-
-    try {
-      await mi({
-        fields: CapitulosCollection.find().fetch(), // {array} data to import
-        db: "meteor", // {string} name of db
-        collection: "capitulosSeries", // {string|function} name of collection, or use a function to
-        //  return a name, accept one param - [fields] the fields to import
-        host: urlMongoDB,
-        callback: (err, db) => {
-          err && console.error(err);
-        },
-      });
-    } catch (error) {
-      console.log(error);
-    }
-
-    try {
-      await mi({
-        fields: DescargasCollection.find().fetch(), // {array} data to import
-        db: "meteor", // {string} name of db
-        collection: "descargasRegister", // {string|function} name of collection, or use a function to
-        //  return a name, accept one param - [fields] the fields to import
-        host: urlMongoDB,
-        callback: (err, db) => {
-          err && console.error(err);
-        },
-      });
-    } catch (error) {
-      console.log(error);
-    }
-
-    try {
-      await mi({
-        fields: TVCollection.find().fetch(), // {array} data to import
-        db: "meteor", // {string} name of db
-        collection: "tvRegister", // {string|function} name of collection, or use a function to
-        //  return a name, accept one param - [fields] the fields to import
-        host: urlMongoDB,
-        callback: (err, db) => {
-          err && console.error(err);
-        },
-      });
-    } catch (error) {
-      console.log(error);
-    }
-
-    // try {
-    //   await mi({
-    //     fields: OnlineCollection.find().fetch(), // {array} data to import
-    //     db: "meteor", // {string} name of db
-    //     collection: 'online', // {string|function} name of collection, or use a function to
-    //     //  return a name, accept one param - [fields] the fields to import
-    //     host: urlMongoDB,
-    //     callback: (err, db) => {
-    //       err && console.error(err);
-    //     },
-    //   });
-    // } catch (error) {
-    //   console.log(error);
-
-    // }
-
+   
     try {
       await mi({
         fields: MensajesCollection.find().fetch(), // {array} data to import
@@ -152,39 +52,9 @@ Meteor.methods({
 
     try {
       await mi({
-        fields: RegisterDataUsersCollection.find().fetch(), // {array} data to import
-        db: "meteor", // {string} name of db
-        collection: "registerDataUsers", // {string|function} name of collection, or use a function to
-        //  return a name, accept one param - [fields] the fields to import
-        host: urlMongoDB,
-        callback: (err, db) => {
-          err && console.error(err);
-        },
-      });
-    } catch (error) {
-      console.log(error);
-    }
-
-    try {
-      await mi({
         fields: LogsCollection.find().fetch(), // {array} data to import
         db: "meteor", // {string} name of db
         collection: "Logs", // {string|function} name of collection, or use a function to
-        //  return a name, accept one param - [fields] the fields to import
-        host: urlMongoDB,
-        callback: (err, db) => {
-          err && console.error(err);
-        },
-      });
-    } catch (error) {
-      console.log(error);
-    }
-
-    try {
-      await mi({
-        fields: ServersCollection.find().fetch(), // {array} data to import
-        db: "meteor", // {string} name of db
-        collection: "servers", // {string|function} name of collection, or use a function to
         //  return a name, accept one param - [fields] the fields to import
         host: urlMongoDB,
         callback: (err, db) => {
@@ -255,106 +125,36 @@ Meteor.methods({
       console.log(error);
     }
 
-    try {
-      await mi({
-        fields: NotificacionUsersConectadosVPNCollection.find().fetch(), // {array} data to import
-        db: "meteor", // {string} name of db
-        collection: "notificacionUsersConectadosVPN", // {string|function} name of collection, or use a function to
-        //  return a name, accept one param - [fields] the fields to import
-        host: urlMongoDB,
-        callback: (err, db) => {
-          err && console.error(err);
-        },
-      });
-    } catch (error) {
-      console.log(error);
-    }
   },
 });
 
-export const SchemaNotificacionUsersConectadosVPNCollection = new SimpleSchema({
-  userIdConnected: {
-    type: String,
-    required: true,
-  },
-  adminIdSolicitud: {
-    type: String,
-    required: true,
-  },
-  mensajeaenviarConnected:{
-    type: String,
-    required: true,
-  },
-  mensajeaenviarDisconnected:{
-    type: String,
-    required: true,
-  },
-  fecha: {
-    type: Date,
-    autoValue: function () {
-      if (this.isInsert) {
-        return new Date();
-      } else if (this.isUpsert) {
-        return { $setOnInsert: new Date() };
-      } else {
-        this.unset(); // Prevent user from supplying their own value
-      }
-    },
-    optional: true,
-  }
-});
 
-NotificacionUsersConectadosVPNCollection.attachSchema(SchemaNotificacionUsersConectadosVPNCollection);
-
-export const SchemaRegisterDataUsersCollection = new SimpleSchema({
-  userId: {
+export const SchemaAsignacionRemesaAdminCollection = new SimpleSchema({
+  adminId:{
     type: String,
-    optional: false,
+    required: true,
   },
-  fecha: {
-    type: Date,
-    autoValue: function () {
-      if (this.isInsert) {
-        return new Date();
-      } else if (this.isUpsert) {
-        return { $setOnInsert: new Date() };
-      } else {
-        this.unset(); // Prevent user from supplying their own value
-      }
-    },
-    optional: true,
-  },
-  vpnMbGastados: {
-    type: Number,
-    defaultValue: 0,
-    optional: true,
-  },
-  megasGastadosinBytes: {
-    type: Number,
-    defaultValue: 0,
-    optional: true,
-  },
-  type: {
+  ventaId: {
     type: String,
-    defaultValue: "proxy",
-    optional: false,
-  },
-  register: {
-    type: String,
-    optional: false,
+    required: true,
   },
 });
 
-RegisterDataUsersCollection.attachSchema(SchemaRegisterDataUsersCollection);
-
+AsignacionRemesaAdminCollection.attachSchema(SchemaAsignacionRemesaAdminCollection);
 export const SchemaVentasCollection = new SimpleSchema({
-  adminId: {
-    type: String,
-    optional: false,
-  },
   userId: {
     type: String,
+    optional: true,
+  },
+  estado: {
+    type: String,
     optional: false,
+    defaultValue: "PENDIENTE_ENTREGA", //puede ser PENDIENTE, ENVIADO, ENTREGADO, CANCELADO
+    allowedValues: ['PENDIENTE_ENTREGA', 'ENTREGADO', 'CANCELADO'],
+  }, //puede ser PENDIENTE, ENVIADO, ENTREGADO, CANCELADO
+  numeroMovilARecargar:{
+    type: String,
+    optional: true,
   },
   createdAt: {
     type: Date,
@@ -369,34 +169,71 @@ export const SchemaVentasCollection = new SimpleSchema({
     },
     optional: false,
   },
+  isCobrado: {
+    type: Boolean,
+    defaultValue: false,
+    optional: true,
+  },
   cobrado: {
-    type: Boolean,
-    defaultValue: false,
-    optional: true,
-  },
-  cobradoAlAdmin: {
-    type: Boolean,
-    defaultValue: false,
-    optional: true,
-  },
-  precio: {
     type: Number,
     defaultValue: 0,
+    optional: true,
+  },
+  monedaCobrado: {
+    type: String,
+    defaultValue: "CUP",
+    optional: true,
+  },
+  recividoEnCuba: {
+    type: Number,
+    defaultValue: 0,
+    optional: true,
+  },
+  monedaRecividoEnCuba: {
+    type: String,
+    defaultValue: "CUP",
+    optional: true,
+  },
+  precioOficial: {
+    type: Number,
+    defaultValue: 0,
+    optional: true,
+  },
+  monedaPrecioOficial: {
+    type: String,
+    defaultValue: "CUP",
     optional: true,
   },
   comentario: {
     type: String,
     optional: true,
   },
-  gananciasAdmin: {
-    type: Number,
-    defaultValue: 0,
-    optional: true,
+  metodoPago: {
+    type: String,
+    defaultValue: "",
+    optional: false,
+    allowedValues: ["PAYPAL", "TRANSFERENCIA", "EFECTIVO"],
   },
   type: {
     type: String,
     optional: false,
+    defaultValue: "RECARGA", //puede ser RECARGA o REMESA
+    allowedValues: ['RECARGA', 'REMESA']
   },
+  producto: {
+    type: Object,
+    optional: true,
+    blackbox: true,
+  },
+  carrito: {
+    type: Array,
+    optional: true,
+  },
+  "carrito.$": {
+    type: Object,
+    optional: true,
+    blackbox: true,
+  }
 });
 
 VentasCollection.attachSchema(SchemaVentasCollection);
@@ -482,6 +319,7 @@ LogsCollection.attachSchema(SchemaLogsCollection);
 export const SchemaOnlineCollection = new SimpleSchema({
   address: {
     type: String,
+    optional: true,
   },
   connectionId: {
     type: String,
@@ -558,619 +396,6 @@ export const SchemaMensajesCollection = new SimpleSchema({
 });
 
 MensajesCollection.attachSchema(SchemaMensajesCollection);
-export const SchemaTVCollection = new SimpleSchema({
-  nombreTV: {
-    type: String,
-  },
-  urlTV: {
-    type: String,
-  },
-  urlBackground: {
-    type: String,
-    defaultValue: "",
-  },
-  descripcion: {
-    type: String,
-    defaultValue: "",
-  },
-  mostrar: {
-    type: String,
-  },
-  createdAt: {
-    type: Date,
-    autoValue: function () {
-      if (this.isInsert) {
-        return new Date();
-      } else if (this.isUpsert) {
-        return { $setOnInsert: new Date() };
-      } else {
-        this.unset(); // Prevent user from supplying their own value
-      }
-    },
-  },
-  vistas: {
-    type: Number,
-    defaultValue: 0,
-  },
-});
-
-TVCollection.attachSchema(SchemaTVCollection);
-
-export const SchemaPelisCollection = new SimpleSchema({
-  nombrePeli: {
-    type: String,
-  },
-  urlPadre: {
-    type: String,
-    optional: true
-  },
-  urlPeli: {
-    type: String,
-  },
-  urlPeliHTTPS: {
-    type: String,
-    optional: true,
-    autoValue: function () {
-      if (this.isInsert) {
-        const urlPeli = this.field("urlPeli");
-        if (urlPeli.isSet) {
-          return urlPeli.value.replace(
-            "http://www.vidkar.com:3005",
-            "https://www.vidkar.com:3006"
-          );
-        }
-      } else if (this.isUpdate) {
-        const urlPeli = this.field("urlPeli");
-        if (urlPeli.isSet) {
-          return {
-            $set: urlPeli.value.replace(
-              "http://www.vidkar.com:3005",
-              "https://www.vidkar.com:3006"
-            ),
-          };
-        } else {
-          this.unset(); // Prevent user from supplying their own value
-        }
-      } else if (this.isUpsert) {
-        const urlPeli = this.field("urlPeli");
-        if (urlPeli.isSet) {
-          return {
-            $setOnInsert: urlPeli.value.replace(
-              "http://www.vidkar.com:3005",
-              "https://www.vidkar.com:3006"
-            ),
-          };
-        } else {
-          this.unset(); // Prevent user from supplying their own value
-        }
-      }
-    },
-  },
-  extension: {
-    type: String,
-    optional: true,
-    autoValue: function () {
-      if (this.isInsert || this.isUpdate || this.isUpsert) {
-        const urlPeli = this.field("urlPeli");
-        if (urlPeli.isSet) {
-          const extensionMatch = urlPeli.value.match(/\.(\w+)$/); // Extrae la extensión usando una expresión regular
-          if (extensionMatch) {
-            return extensionMatch[1]; // Devuelve solo la extensión (ej., "jpg", "mp4")
-          }
-          return null; // Si no hay extensión, asigna null
-        } else {
-          this.unset(); // Evita que se asigne un valor incorrecto
-        }
-      }
-    },
-  },  
-  urlBackground: {
-    type: String,
-  },
-  urlBackgroundHTTPS: {
-    type: String,
-    optional: true,
-    autoValue: function () {
-      if (this.isInsert) {
-        const urlBackground = this.field("urlBackground");
-        if (urlBackground.isSet) {
-          return urlBackground.value.replace(
-            "http://www.vidkar.com:3005",
-            "https://www.vidkar.com:3006"
-          );
-        }
-      } else if (this.isUpdate) {
-        const urlBackground = this.field("urlBackground");
-        if (urlBackground.isSet) {
-          return {
-            $set: urlBackground.value.replace(
-              "http://www.vidkar.com:3005",
-              "https://www.vidkar.com:3006"
-            ),
-          };
-        } else {
-          this.unset(); // Prevent user from supplying their own value
-        }
-      } else if (this.isUpsert) {
-        const urlBackground = this.field("urlBackground");
-        if (urlBackground.isSet) {
-          return {
-            $setOnInsert: urlBackground.value.replace(
-              "http://www.vidkar.com:3005",
-              "https://www.vidkar.com:3006"
-            ),
-          };
-        } else {
-          this.unset(); // Prevent user from supplying their own value
-        }
-      }
-    },
-  },
-  descripcion: {
-    type: String,
-  },
-  urlTrailer: {
-    type: String,
-    defaultValue: "",
-    optional: true,
-  },
-  tamano: {
-    type: String,
-  },
-  mostrar: {
-    type: String,
-  },
-  createdAt: {
-    type: Date,
-    autoValue: function () {
-      if (this.isInsert) {
-        return new Date();
-      } else if (this.isUpsert) {
-        return { $setOnInsert: new Date() };
-      } else {
-        this.unset(); // Prevent user from supplying their own value
-      }
-    },
-  },
-  subtitulo: {
-    type: String,
-    defaultValue: "",
-    optional: true,
-  },
-  vistas: {
-    type: Number,
-    defaultValue: 0,
-  },
-  year: {
-    type: Number,
-    defaultValue: 1900,
-    // min: 1900,
-  },
-  textSubtitle: {
-    type: String,
-    defaultValue: "",
-    optional: true,
-  },
-  clasificacion: {
-    type: Array,
-    defaultValue: [],
-  },
-  "clasificacion.$": { type: String },
-  idimdb: {
-    type: String,
-    defaultValue: "",
-    optional: true,
-  },
-  actors: {
-    type: Array,
-    defaultValue: [],
-    optional: true,
-  },
-  "actors.$": { type: String },
-});
-
-PelisCollection.attachSchema(SchemaPelisCollection);
-
-export const SchemaSeriesCollection = new SimpleSchema({
-  nombre: {
-    type: String,
-  },
-  descripcion: {
-    type: String,
-    optional: true,
-  },
-  urlTrailer: {
-    type: String,
-    defaultValue: "",
-    optional: true,
-  },
-  anoLanzamiento: {
-    type: Number,
-    defaultValue: 1900,
-    // min: 1900,
-  },
-  mostrar: {
-    type: Boolean,
-    optional: true,
-    defaultValue: true,
-  },
-  createdAt: {
-    type: Date,
-    autoValue: function () {
-      if (this.isInsert) {
-        return new Date();
-      } else if (this.isUpsert) {
-        return { $setOnInsert: new Date() };
-      } else {
-        this.unset(); // Prevent user from supplying their own value
-      }
-    },
-  },
-  urlBackground: {
-    type: String,
-    optional: true,
-  },
-  urlBackgroundHTTPS: {
-    type: String,
-    optional: true,
-    autoValue: function () {
-      if (this.isInsert) {
-        const urlBackground = this.field("urlBackground");
-        if (urlBackground.isSet) {
-          return urlBackground.value ? urlBackground.value.replace(
-            "http://www.vidkar.com:3005",
-            "https://www.vidkar.com:3006"
-          ):null;
-        }
-      } else if (this.isUpdate) {
-        const urlBackground = this.field("urlBackground");
-        if (urlBackground.isSet) {
-          return {
-            $set: urlBackground.value
-              ? urlBackground.value.replace(
-                  "http://www.vidkar.com:3005",
-                  "https://www.vidkar.com:3006"
-                )
-              : null,
-          };
-        } else {
-          this.unset(); // Prevent user from supplying their own value
-        }
-      } else if (this.isUpsert) {
-        const urlBackground = this.field("urlBackground");
-        if (urlBackground.isSet) {
-          return {
-            $setOnInsert: urlBackground.value
-              ? urlBackground.value.replace(
-                  "http://www.vidkar.com:3005",
-                  "https://www.vidkar.com:3006"
-                )
-              : null,
-          };
-        } else {
-          this.unset(); // Prevent user from supplying their own value
-        }
-      }
-    },
-  },
-  clasificacion: {
-    type: Array,
-    defaultValue: [],
-  },
-  "clasificacion.$": { type: String },
-  idimdb: {
-    type: String,
-    defaultValue: "",
-    optional: true,
-  },
-  actors: {
-    type: Array,
-    defaultValue: [],
-    optional: true,
-  },
-  "actors.$": { type: String },
-});
-
-SeriesCollection.attachSchema(SchemaSeriesCollection);
-
-export const SchemaTemporadasCollection = new SimpleSchema({
-  idSerie: {
-    type: String,
-    optional: false
-  },
-  numeroTemporada: {
-    type: Number,
-    optional: false,
-  },
-  url: {
-    type: String,
-    optional: true,
-  },
-  actualizar: {
-    type: Boolean,
-    optional: true,
-    defaultValue: true,
-  },
-});
-
-TemporadasCollection.attachSchema(SchemaTemporadasCollection);
-
-
-export const SchemaCapitulosCollection = new SimpleSchema({
-  nombre: {
-    type: String,
-  },
-  url: {
-    type: String,
-  },
-  idTemporada: {
-    type: String,
-    optional: false
-  },
-  urlHTTPS: {
-    type: String,
-    optional: true,
-    autoValue: function () {
-      if (this.isInsert) {
-        const url = this.field("url");
-        if (url.isSet) {
-          return url.value.replace(
-            "http://www.vidkar.com:3005",
-            "https://www.vidkar.com:3006"
-          );
-        }
-      } else if (this.isUpdate) {
-        const url = this.field("url");
-        if (url.isSet) {
-          return {
-            $set: url.value.replace(
-              "http://www.vidkar.com:3005",
-              "https://www.vidkar.com:3006"
-            ),
-          };
-        } else {
-          this.unset(); // Prevent user from supplying their own value
-        }
-      } else if (this.isUpsert) {
-        const url = this.field("url");
-        if (url.isSet) {
-          return {
-            $setOnInsert: url.value.replace(
-              "http://www.vidkar.com:3005",
-              "https://www.vidkar.com:3006"
-            ),
-          };
-        } else {
-          this.unset(); // Prevent user from supplying their own value
-        }
-      }
-    },
-  },
-  urlBackground: {
-    type: String,
-    optional: true,
-  },
-  urlBackgroundHTTPS: {
-    type: String,
-    optional: true,
-    autoValue: function () {
-      if (this.isInsert) {
-        const urlBackground = this.field("urlBackground");
-        if (urlBackground.isSet) {
-          return urlBackground.value
-            ? urlBackground.value.replace(
-                "http://www.vidkar.com:3005",
-                "https://www.vidkar.com:3006"
-              )
-            : null;
-        }
-      } else if (this.isUpdate) {
-        const urlBackground = this.field("urlBackground");
-        if (urlBackground.isSet) {
-          return {
-            $set: urlBackground.value
-              ? urlBackground.value.replace(
-                  "http://www.vidkar.com:3005",
-                  "https://www.vidkar.com:3006"
-                )
-              : null,
-          };
-        } else {
-          this.unset(); // Prevent user from supplying their own value
-        }
-      } else if (this.isUpsert) {
-        const urlBackground = this.field("urlBackground");
-        if (urlBackground.isSet) {
-          return {
-            $setOnInsert: urlBackground.value
-              ? urlBackground.value.replace(
-                  "http://www.vidkar.com:3005",
-                  "https://www.vidkar.com:3006"
-                )
-              : null,
-          };
-        } else {
-          this.unset(); // Prevent user from supplying their own value
-        }
-      }
-    },
-  },
-  descripcion: {
-    type: String,
-    optional: true,
-  },
-  urlTrailer: {
-    type: String,
-    defaultValue: "",
-    optional: true,
-  },
-  mostrar: {
-    type: Boolean,
-    optional: true,
-    defaultValue: true,
-  },
-  createdAt: {
-    type: Date,
-    autoValue: function () {
-      if (this.isInsert) {
-        return new Date();
-      } else if (this.isUpsert) {
-        return { $setOnInsert: new Date() };
-      } else {
-        this.unset(); // Prevent user from supplying their own value
-      }
-    },
-  },
-  subtitulo: {
-    type: String,
-    defaultValue: "",
-    optional: true,
-  },
-  vistas: {
-    type: Number,
-    defaultValue: 0,
-  },
-  textSubtitle: {
-    type: String,
-    defaultValue: "",
-    optional: true,
-  },
-  capitulo: {
-    type: Number,
-    optional: false,
-  },
-  extension: {
-    type: String,
-    optional: true,
-    autoValue: function () {
-      if (this.isInsert || this.isUpdate || this.isUpsert) {
-        const urlPeli = this.field("url");
-        if (urlPeli.isSet) {
-          const extensionMatch = urlPeli.value.match(/\.(\w+)$/); // Extrae la extensión usando una expresión regular
-          if (extensionMatch) {
-            return extensionMatch[1]; // Devuelve solo la extensión (ej., "jpg", "mp4")
-          }
-          return null; // Si no hay extensión, asigna null
-        } else {
-          this.unset(); // Evita que se asigne un valor incorrecto
-        }
-      }
-    },
-  },  
-});
-
-CapitulosCollection.attachSchema(SchemaCapitulosCollection);
-
-export const SchemaDescargaCollection = new SimpleSchema({
-  idFile: {
-    type: String,
-  },
-  nombreFile: {
-    type: String,
-  },
-  tamanoFile: {
-    type: String,
-    defaultValue: "",
-    optional: true,
-  },
-  comentarios: {
-    type: String,
-    defaultValue: "",
-    optional: true,
-  },
-  createdAt: {
-    type: Date,
-    autoValue: function () {
-      if (this.isInsert) {
-        return new Date();
-      } else if (this.isUpsert) {
-        return { $setOnInsert: new Date() };
-      } else {
-        this.unset(); // Prevent user from supplying their own value
-      }
-    },
-  },
-  descargadoPor: {
-    type: String,
-  },
-  thumbnail: {
-    type: String,
-  },
-  urlReal: {
-    type: String,
-  },
-  url: {
-    type: String,
-    defaultValue: "",
-    optional: true,
-  },
-  vistas: {
-    type: Number,
-    defaultValue: 0,
-  },
-});
-
-DescargasCollection.attachSchema(SchemaDescargaCollection);
-
-export const SchemaServersCollection = new SimpleSchema({
-  domain: {
-    type: String,
-  },
-  ip: {
-    type: String,
-  },
-  active: {
-    type: Boolean,
-    defaultValue: true,
-    optional: true,
-  },
-  details: {
-    type: String,
-    defaultValue: "",
-    optional: true,
-  },
-  idUserSolicitandoReinicio: {
-    type: String,
-    optional: true,
-  },
-  createdAt: {
-    type: Date,
-    autoValue: function () {
-      if (this.isInsert) {
-        return new Date();
-      } else if (this.isUpsert) {
-        return { $setOnInsert: new Date() };
-      } else {
-        this.unset(); // Prevent user from supplying their own value
-      }
-    },
-  },
-  estado:{
-    type: String,
-    defaultValue: "INACTIVO", //ACTIVO, INACTIVO, PENDIENTE_A_REINICIAR
-    optional: true,
-  },
-  lastUpdate: {
-    type: Date,
-    optional: true,
-    autoValue: function () {
-      //si inserta o actualiza que se actualice la fecha
-      if (this.isInsert || this.isModifier) {
-        return new Date();
-      }
-      
-    },
-  },
-  usuariosAprobados: {
-    type: Array,
-    defaultValue: [],
-    optional: true,
-  },
-  "usuariosAprobados.$": { type: String },
-
-});
-
-ServersCollection.attachSchema(SchemaServersCollection);
 
 export const SchemaFilesCollection = new SimpleSchema({
   nombre: {
@@ -1201,25 +426,103 @@ export const SchemaFilesCollection = new SimpleSchema({
 });
 
 FilesCollection.attachSchema(SchemaFilesCollection);
-
-
-export const SchemaAudiosCollection = new SimpleSchema({
-  fragmento: {
+export const SchemaPaypalCollection = new SimpleSchema({
+  idOrder: {
     type: String,
+    optional: false,
   },
-  idUser: {
+  carritos: {
+    type: Object,
+    optional: true,
+    blackbox: true,
+  },
+  data: {
+    type: Object,
+    optional: true,
+    blackbox: true,
+  },
+  status: {
     type: String,
+    defaultValue: "CREATED",
+    optional: true,
+  },
+  link: {
+    type: String,
+    optional: true,
+  },
+  userId: {
+    type: String,
+    optional: false,
   },
   createdAt: {
-    optional: true,
     type: Date,
     autoValue: function () {
+      if (this.isInsert) {
         return new Date();
+      } else if (this.isUpsert) {
+        return { $setOnInsert: new Date() };
+      } else {
+        this.unset(); // Prevent user from supplying their own value
+      }
     },
-  }
+    optional: false,
+  },
 });
 
-AudiosCollection.attachSchema(SchemaAudiosCollection);
+PaypalCollection.attachSchema(SchemaPaypalCollection);
+
+export const SchemaCarritoCollection = new SimpleSchema({
+  idUser: {
+    type: String,
+    optional: false,
+  },
+  createdAt: {
+    type: Date,
+    autoValue: function () {
+      if (this.isInsert) {
+        return new Date();
+      } else if (this.isUpsert) {
+        return { $setOnInsert: new Date() };
+      } else {
+        this.unset(); // Prevent user from supplying their own value
+      }
+    },
+    optional: false,
+  },
+  type:{
+    type: String,
+    required: true,
+    optional: false,
+    allowedValues: ['RECARGA', 'REMESA']
+  },
+  producto: {
+    type: Object,
+    // defaultValue: {},
+    optional: false,
+    blackbox: true,
+  },
+  comentario: {
+    type: String,
+    defaultValue: "",
+    optional: true,
+  },
+  metodoPago: {
+    type: String,
+    defaultValue: "PAYPAL",
+    required: true,
+    optional: false,
+    allowedValues: ['PAYPAL', 'TRANSFERENCIA', 'EFECTIVO']
+  }
+  // recogidaEnLocal:{
+  //   type: Boolean,
+  //   defaultValue: false,
+  //   optional: false,
+  // }
+});
+
+
+CarritoCollection.attachSchema(SchemaCarritoCollection);
+
 
 FilesCollection.allow({
   insert(doc) {
@@ -1255,22 +558,6 @@ LogsCollection.allow({
   },
 });
 
-RegisterDataUsersCollection.allow({
-  insert(doc) {
-    // The user must be logged in and the document must be owned by the user.
-    return true;
-  },
-
-  update() {
-    // Can only change your own documents.
-    return true;
-  },
-
-  remove(userId, doc) {
-    // Can only remove your own documents.
-    return Meteor.users.findOne({ _id: userId }).profile.role == "admin";
-  },
-});
 OnlineCollection.allow({
   insert(doc) {
     // The user must be logged in and the document must be owned by the user.
@@ -1287,102 +574,7 @@ OnlineCollection.allow({
     return true;
   },
 });
-TVCollection.allow({
-  insert(doc) {
-    // The user must be logged in and the document must be owned by the user.
-    return true;
-  },
 
-  update() {
-    // Can only change your own documents.
-    return true;
-  },
-
-  remove(userId, doc) {
-    // Can only remove your own documents.
-    return Meteor.users.findOne({ _id: userId }).profile.role == "admin";
-  },
-});
-PelisCollection.allow({
-  insert(doc) {
-    // The user must be logged in and the document must be owned by the user.
-    return true;
-  },
-
-  update() {
-    // Can only change your own documents.
-    return true;
-  },
-
-  remove(userId, doc) {
-    // Can only remove your own documents.
-    return Meteor.users.findOne({ _id: userId }).profile.role == "admin";
-  },
-});
-CapitulosCollection.allow({
-  insert(doc) {
-    // The user must be logged in and the document must be owned by the user.
-    return true;
-  },
-
-  update() {
-    // Can only change your own documents.
-    return true;
-  },
-
-  remove(userId, doc) {
-    // Can only remove your own documents.
-    return Meteor.users.findOne({ _id: userId }).profile.role == "admin";
-  },
-});
-TemporadasCollection.allow({
-  insert(doc) {
-    // The user must be logged in and the document must be owned by the user.
-    return true;
-  },
-
-  update() {
-    // Can only change your own documents.
-    return true;
-  },
-
-  remove(userId, doc) {
-    // Can only remove your own documents.
-    return Meteor.users.findOne({ _id: userId }).profile.role == "admin";
-  },
-});
-SeriesCollection.allow({
-  insert(doc) {
-    // The user must be logged in and the document must be owned by the user.
-    return true;
-  },
-
-  update() {
-    // Can only change your own documents.
-    return true;
-  },
-
-  remove(userId, doc) {
-    // Can only remove your own documents.
-    return Meteor.users.findOne({ _id: userId }).profile.role == "admin";
-  },
-});
-DescargasCollection.allow({
-  insert(doc) {
-    // The user must be logged in and the document must be owned by the user.
-    return true;
-  },
-
-  update(userId, doc, fields, modifier) {
-    // Can only change your own documents.
-    return true;
-  },
-
-  remove(userId, doc) {
-    // Can only remove your own documents.
-    return Meteor.users.findOne({ _id: userId }).profile.role == "admin";
-  },
-});
 Meteor.users.allow({
   insert(doc) {
     // The user must be logged in and the document must be owned by the user.
@@ -1399,6 +591,7 @@ Meteor.users.allow({
     return Meteor.users.findOne({ _id: userId }).profile.role == "admin";
   },
 });
+
 VentasCollection.allow({
   insert(doc) {
     // The user must be logged in and the document must be owned by the user.
@@ -1415,23 +608,8 @@ VentasCollection.allow({
     return Meteor.users.findOne({ _id: userId }).profile.role == "admin";
   },
 });
+
 MensajesCollection.allow({
-  insert(doc) {
-    // The user must be logged in and the document must be owned by the user.
-    return true;
-  },
-
-  update(userId, doc, fields, modifier) {
-    // Can only change your own documents.
-    return true;
-  },
-
-  remove(userId, doc) {
-    // Can only remove your own documents.
-    return true;
-  },
-});
-ServersCollection.allow({
   insert(doc) {
     // The user must be logged in and the document must be owned by the user.
     return true;
@@ -1465,7 +643,7 @@ PreciosCollection.allow({
   },
 });
 
-AudiosCollection.allow({
+CountriesCollection.allow({
   insert(userId, doc) {
     // The user must be logged in and the document must be owned by the user.
     return true;
@@ -1482,7 +660,7 @@ AudiosCollection.allow({
   },
 });
 
-NotificacionUsersConectadosVPNCollection.allow({
+ProvidersCollection.allow({
   insert(userId, doc) {
     // The user must be logged in and the document must be owned by the user.
     return true;
@@ -1498,3 +676,91 @@ NotificacionUsersConectadosVPNCollection.allow({
     return Meteor.users.findOne({ _id: userId }).profile.role == "admin";
   },
 });
+
+RegionsCollection.allow({
+  insert(userId, doc) {
+    // The user must be logged in and the document must be owned by the user.
+    return true;
+  },
+
+  update(userId, doc, fields, modifier) {
+    // Can only change your own documents.
+    return true;
+  },
+
+  remove(userId, doc) {
+    // Can only remove your own documents.
+    return Meteor.users.findOne({ _id: userId }).profile.role == "admin";
+  },
+});
+
+ProductosCollection.allow({
+  insert(userId, doc) {
+    // The user must be logged in and the document must be owned by the user.
+    return true;
+  },
+
+  update(userId, doc, fields, modifier) {
+    // Can only change your own documents.
+    return true;
+  },
+
+  remove(userId, doc) {
+    // Can only remove your own documents.
+    return Meteor.users.findOne({ _id: userId }).profile.role == "admin";
+  },
+});
+
+
+ProductosDescriptionsCollection.allow({
+  insert(userId, doc) {
+    // The user must be logged in and the document must be owned by the user.
+    return true;
+  },
+
+  update(userId, doc, fields, modifier) {
+    // Can only change your own documents.
+    return true;
+  },
+
+  remove(userId, doc) {
+    // Can only remove your own documents.
+    return Meteor.users.findOne({ _id: userId }).profile.role == "admin";
+  },
+})
+
+ConfigCollection.allow({
+  insert(userId, doc) {
+    // The user must be logged in and the document must be owned by the user.
+    return true;
+  },
+
+  update(userId, doc, fields, modifier) {
+    // Can only change your own documents.
+    return true;
+  },
+
+  remove(userId, doc) {
+    // Can only remove your own documents.
+    return Meteor.users.findOne({ _id: userId }).profile.role == "admin";
+  },
+});
+
+AsignacionRemesaAdminCollection.allow({
+  insert(userId, doc) {
+    // The user must be logged in and the document must be owned by the user.
+    return true;
+  },
+
+  update(userId, doc, fields, modifier) {
+    // Can only change your own documents.
+    return true;
+  },
+
+  remove(userId, doc) {
+    // Can only remove your own documents.
+    return Meteor.users.findOne({ _id: userId }).profile.role == "admin";
+  },
+});
+
+
